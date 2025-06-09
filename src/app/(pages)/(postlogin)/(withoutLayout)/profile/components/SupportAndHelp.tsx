@@ -1,7 +1,7 @@
 import { Box, Typography } from '@mui/material'
 import React from 'react'
-import SettingItem from './SettingItem'
 import DangerZoneCard from './DangerZoneCard'
+import InformationCard from '@/app/components/InformationCard';
 
 interface settingItemsType {
     icon: string,
@@ -50,7 +50,7 @@ function SupportAndHelp() {
             </Typography>
 
             {settingItems.map((item) => (
-                <SettingItem
+                <InformationCard
                     key={item.title}
                     icon={item.icon}
                     title={item.title}

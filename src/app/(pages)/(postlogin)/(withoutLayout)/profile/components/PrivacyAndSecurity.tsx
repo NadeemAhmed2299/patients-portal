@@ -1,6 +1,6 @@
+import InformationCard from '@/app/components/InformationCard';
 import { Box, Switch, Typography } from '@mui/material'
 import React, { useState } from 'react'
-import SettingItem from './SettingItem'
 
 interface AuthenticationSettings {
     twoFactor: boolean;
@@ -69,7 +69,7 @@ function PrivacyAndSecurity() {
                 Privacy & Security
             </Typography>
             {settings.map((setting, idx) => (
-                <SettingItem
+                <InformationCard
                     key={setting.title}
                     icon={setting.icon}
                     title={setting.title}

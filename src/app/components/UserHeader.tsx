@@ -1,6 +1,5 @@
 import { Avatar, Box, IconButton, Typography } from '@mui/material'
 import { ArrowBack as ArrowBackIcon } from '@mui/icons-material';
-import { useRouter } from 'next/router';
 import React from 'react'
 
 interface UserDetailsTypes {

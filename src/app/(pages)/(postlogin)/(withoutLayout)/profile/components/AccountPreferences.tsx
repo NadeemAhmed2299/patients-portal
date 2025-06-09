@@ -1,8 +1,8 @@
 "use client"
 
 import React, { useState } from 'react'
-import SettingItem from './SettingItem'
 import { Box, Switch, Typography } from '@mui/material'
+import InformationCard from '@/app/components/InformationCard';
 
 // Notification states
 interface NotificationSettings {
@@ -88,7 +88,7 @@ function AccountPreferences() {
             </Typography>
 
             {notificationOptions.map(option => (
-                <SettingItem
+                <InformationCard
                     key={option.key}
                     icon={option.icon}
                     title={option.title}
@@ -104,7 +104,7 @@ function AccountPreferences() {
             ))}
 
             {notificationPreferences.map((item, index) => (
-                <SettingItem
+                <InformationCard
                     key={index}
                     icon={item.icon}
                     title={item.title}

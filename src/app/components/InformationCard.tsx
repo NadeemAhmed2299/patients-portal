@@ -2,7 +2,7 @@ import React from 'react';
 import { Card, CardContent, Box, Typography, IconButton } from '@mui/material';
 import { ArrowForward } from '@mui/icons-material';
 
-interface SettingItemProps {
+interface InformationCardProps {
   icon: React.ReactNode;
   title: string;
   subtitle: string;
@@ -10,7 +10,7 @@ interface SettingItemProps {
   rightElement?: React.ReactNode;
 }
 
-const SettingItem: React.FC<SettingItemProps> = ({
+const InformationCard: React.FC<InformationCardProps> = ({
   icon,
   title,
   subtitle,
@@ -60,4 +60,4 @@ const SettingItem: React.FC<SettingItemProps> = ({
   </Card>
 );
 
-export default SettingItem;
+export default InformationCard;

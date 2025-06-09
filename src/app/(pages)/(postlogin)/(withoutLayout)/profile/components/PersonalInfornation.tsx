@@ -1,6 +1,6 @@
+import InformationCard from '@/app/components/InformationCard';
 import { Box, Typography } from '@mui/material'
 import React from 'react'
-import SettingItem from './SettingItem'
 
 interface PersonalInfoItem {
     icon: string;
@@ -37,7 +37,7 @@ function PersonalInfornation() {
                 Personal Information
             </Typography>
             {personalInfoItems.map((item, idx) => (
-                <SettingItem
+                <InformationCard
                     key={item.title}
                     icon={item.icon}
                     title={item.title}
