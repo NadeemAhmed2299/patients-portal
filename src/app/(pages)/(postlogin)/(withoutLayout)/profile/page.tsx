@@ -1,6 +1,6 @@
 'use client';
 
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import {
   Box
 } from '@mui/material';
@@ -9,10 +9,19 @@ import AccountPreferences from './components/AccountPreferences';
 import PrivacyAndSecurity from './components/PrivacyAndSecurity';
 import CaregiversAndFamilyAccess from './components/CaregiversAndFamilyAccess';
 import SupportAndHelp from './components/SupportAndHelp';
+import { useHeader } from '@/app/contexts/headerContext';
 
 // Types
 
 const AccountManagementPage: React.FC = () => {
+
+  const { setHeaderContent } = useHeader();
+
+  useEffect(() => {
+    setHeaderContent({
+      title: 'Account Management'
+    });
+  }, [setHeaderContent]);
 
   return (
     <Fragment>

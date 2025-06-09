@@ -283,7 +283,7 @@ const CaregiverModal: React.FC<CaregiverModalProps> = ({
                 onClick={handleSubmit}
                 sx={{ 
                   flex: 1, 
-                  bgcolor: '#509cde', 
+                  bgcolor: '#8b5cf6', 
                   '&:hover': { bgcolor: '#6c5aae' },
                   textTransform: 'none'
                 }}
