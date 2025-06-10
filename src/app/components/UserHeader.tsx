@@ -1,99 +1,120 @@
 // app/components/UserHeader.tsx
-import { Avatar, Box, IconButton, Typography } from '@mui/material';
+import { Box, IconButton, Typography, LinearProgress } from '@mui/material';
 import { ArrowBack as ArrowBackIcon } from '@mui/icons-material';
 import React from 'react';
+import HeaderIcon from './HeaderIcon';
 
 interface UserHeaderProps {
   onBack: () => void;
   title: string;
-  subtitle?: string;
   userGreeting?: string;
   appointmentInfo?: {
     date: string;
     time: string;
   };
-  showAvatar?: boolean;
+  treatmentProgress?: {
+    protocol: string;
+    totalCycles: number;
+    completed: number;
+    nextCycle?: string;
+  };
   showBackButton?: boolean;
+  showHeaderIcons?: boolean;
 }
 
-const userDetails = {
-  userName: "James Johnson",
-  userId: "PT100456"
-};
-
-function UserHeader({
+export function UserHeader({
   onBack,
   title,
-  subtitle,
   userGreeting,
   appointmentInfo,
-  showAvatar = true,
+  treatmentProgress,
   showBackButton = true,
+  showHeaderIcons = true,
 }: UserHeaderProps) {
+  const progressPercentage = treatmentProgress 
+    ? Math.round((treatmentProgress.completed / treatmentProgress.totalCycles) * 100)
+    : 0;
+
   return (
     <Box
       sx={{
-        background: 'linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%)',
+        background: 'linear-gradient(90deg, #2B61EB -21.25%, #8645E1 47.12%, #1F4ED8 116.67%)',
         color: 'white',
         p: 2.5,
         borderRadius: '0 0 20px 20px'
       }}
     >
+      {/* Header top row with title and icons */}
       <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 2.5 }}>
         {showBackButton && (
           <IconButton onClick={onBack} sx={{ color: '#fff', p: 1 }} aria-label="Go back">
             <ArrowBackIcon />
           </IconButton>
         )}
-        <Typography variant="h6" sx={{ fontWeight: 'bold', flex: 1, textAlign: 'center' }}>
+        <Typography variant="h6" sx={{ fontWeight: 'bold', flex: 1, textAlign: 'left' }}>
           {title}
         </Typography>
-        <Box width={34} />
+        {showHeaderIcons && (
+          <Box sx={{ display: 'flex', gap: '12px', flexShrink: 0 }}>
+            <HeaderIcon onClick={() => alert('Search')}>🔍</HeaderIcon>
+            <HeaderIcon onClick={() => alert('Notifications')}>🔔</HeaderIcon>
+            <HeaderIcon onClick={() => alert('Account')}>👤</HeaderIcon>
+          </Box>
+        )}
       </Box>
 
-      {showAvatar && (
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-          <Avatar
-            sx={{
-              width: 60,
-              height: 60,
-              bgcolor: 'rgba(255, 255, 255, 0.2)',
-              fontSize: '24px',
-              fontWeight: 'bold'
-            }}
-            aria-label="User avatar"
-          >
-            {userDetails.userName.split(' ').map(n => n[0]).join('')}
-          </Avatar>
-          <Box sx={{ flex: 1 }}>
-            {userGreeting && (
-              <Typography variant="body1" sx={{ opacity: 0.8, mb: 0.5 }}>
-                {userGreeting}
-              </Typography>
-            )}
-            <Typography variant="h6" sx={{ fontWeight: 600, mb: 0.5 }}>
-              {userDetails.userName}
+      {/* Treatment progress section (only for home page) */}
+      {treatmentProgress && (
+        <Box sx={{ mb: 3 }}>
+          <Typography variant="body2" sx={{ fontWeight: 500, mb: 1 }}>
+            Treatment Progress
+          </Typography>
+          <Typography variant="body2" sx={{ mb: 1 }}>
+            {treatmentProgress.protocol} • {treatmentProgress.totalCycles} Cycles Total
+          </Typography>
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 1 }}>
+            <LinearProgress
+              variant="determinate"
+              value={progressPercentage}
+              sx={{
+                flexGrow: 1,
+                height: 8,
+                borderRadius: 4,
+                backgroundColor: 'rgba(255, 255, 255, 0.2)',
+                '& .MuiLinearProgress-bar': {
+                  borderRadius: 4,
+                  backgroundColor: '#fff',
+                },
+              }}
+            />
+            <Typography variant="body2" sx={{ fontWeight: 600 }}>
+              {progressPercentage}% Complete
             </Typography>
-            {subtitle && (
-              <Typography variant="body2" sx={{ opacity: 0.9 }}>
-                {subtitle}
-              </Typography>
-            )}
-            {appointmentInfo && (
-              <Box sx={{ mt: 1.5 }}>
-                <Typography variant="body2" sx={{ fontWeight: 500 }}>
-                  Next Appointment
-                </Typography>
-                <Typography variant="body2">
-                  {appointmentInfo.date} at {appointmentInfo.time}
-                </Typography>
-              </Box>
-            )}
           </Box>
+          {treatmentProgress.nextCycle && (
+            <Typography variant="body2" sx={{ fontWeight: 600 }}>
+              Next Cycle {treatmentProgress.completed + 1} - {treatmentProgress.nextCycle}
+            </Typography>
+          )}
+        </Box>
+      )}
+
+      {/* Appointment info section */}
+      {appointmentInfo && (
+        <Box sx={{
+          background: 'rgba(255, 255, 255, 0.2)',
+          borderRadius: '12px',
+          padding: '15px',
+          backdropFilter: 'blur(10px)'
+        }}>
+          <Typography variant="body2" sx={{ fontWeight: 500 }}>
+            Next Appointment
+          </Typography>
+          <Typography variant="body2" sx={{ mt: 1, fontWeight: 600 }}>
+            {appointmentInfo.date} at {appointmentInfo.time}
+          </Typography>
         </Box>
       )}
     </Box>
   );
 }
-
-export default UserHeader;

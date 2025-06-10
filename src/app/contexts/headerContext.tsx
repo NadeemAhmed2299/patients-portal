@@ -3,17 +3,41 @@
 
 import { createContext, useContext, useState } from 'react';
 
-interface HeaderContent {
+type HeaderVariant = 'default' | 'patient-profile';
+
+interface BaseHeaderContent {
   title: string;
-  subtitle?: string;
+  showBackButton?: boolean;
+}
+
+interface DefaultHeaderContent extends BaseHeaderContent {
+  variant: 'default';
   userGreeting?: string;
   appointmentInfo?: {
     date: string;
     time: string;
   };
-  showAvatar?: boolean;
-  showBackButton?: boolean;
+  treatmentProgress?: {
+    protocol: string;
+    totalCycles: number;
+    completed: number;
+    nextCycle?: string;
+  };
+  showHeaderIcons?: boolean;
 }
+
+interface PatientProfileHeaderContent extends BaseHeaderContent {
+  variant: 'patient-profile';
+  patientDetails: {
+    name: string;
+    mrn: string;
+    age: string;
+    diagnosisDate?: string;
+    stage?: string;
+  };
+}
+
+type HeaderContent = DefaultHeaderContent | PatientProfileHeaderContent;
 
 interface HeaderContextType {
   headerContent: HeaderContent;
@@ -24,8 +48,8 @@ const HeaderContext = createContext<HeaderContextType | undefined>(undefined);
 
 export function HeaderProvider({ children }: { children: React.ReactNode }) {
   const [headerContent, setHeaderContent] = useState<HeaderContent>({
+    variant: 'default',
     title: '',
-    showAvatar: true,
     showBackButton: true,
   });
 

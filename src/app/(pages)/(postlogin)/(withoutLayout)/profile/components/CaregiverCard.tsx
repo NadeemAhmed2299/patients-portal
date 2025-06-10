@@ -24,8 +24,8 @@ const CaregiverCard = ({
   };
 
   return (
-    <Card sx={{ mb: 1.5 }}>
-      <CardContent sx={{ p: 2, '&:last-child': { pb: 2 } }}>
+    <Card sx={{height: '100%'}}>
+      <CardContent sx={{ p: 2, '&:last-child': { pb: 2 }, height: '100%' }}>
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 1.5 }}>
           <Avatar sx={{ bgcolor: '#8b5cf6', fontWeight: 600 }}>
             {name.split(' ').map(n => n[0]).join('')}

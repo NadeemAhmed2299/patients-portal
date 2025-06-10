@@ -1,4 +1,4 @@
-import { Box, Button, Typography } from '@mui/material'
+import { Box, Button, Grid, Typography } from '@mui/material'
 import { Add as AddIcon } from '@mui/icons-material';
 import React, { useState } from 'react'
 import CaregiverCard from './CaregiverCard'
@@ -27,8 +27,8 @@ interface Caregiver {
 }
 
 interface CaregiverFormData extends Omit<Caregiver, 'id' | 'status'> {
-  id?: string;
-  status?: CaregiverStatus;
+    id?: string;
+    status?: CaregiverStatus;
 }
 
 function CaregiversAndFamilyAccess() {
@@ -143,37 +143,45 @@ function CaregiversAndFamilyAccess() {
                 Caregivers & Family Access
             </Typography>
 
-            {caregivers.map(caregiver => (
-                <CaregiverCard
-                    key={caregiver.id}
-                    name={caregiver.name}
-                    relationship={caregiver.relationship}
-                    status={caregiver.status as 'Verified' | 'Pending'}
-                    permissions={getPermissionLabels(caregiver.permissions)}
-                    onEdit={() => handleEditCaregiver(caregiver.id)}
-                    onRemove={() => handleRemoveCaregiver(caregiver.id)}
-                />
-            ))}
-
-            <Button
-                variant="contained"
-                onClick={handleAddCaregiver}
-                startIcon={<AddIcon />}
-                sx={{
-                    bgcolor: '#8b5cf6',
-                    color: '#fff',
-                    borderRadius: '12px',
-                    p: 2,
-                    width: '100%',
-                    textTransform: 'none',
-                    fontWeight: 600,
-                    mt: 2,
-                    '&:hover': { bgcolor: '#6c5aae' }
-                }}
-                aria-label="Add new caregiver"
-            >
-                Add New Caregiver
-            </Button>
+            <Grid container spacing={2}>
+                {caregivers.map(caregiver => (
+                    <Grid key={caregiver.id} size={{ xs: 12, md: 4 }} sx={{ mb: 1.5 }}>
+                        <CaregiverCard
+                            name={caregiver.name}
+                            relationship={caregiver.relationship}
+                            status={caregiver.status as 'Verified' | 'Pending'}
+                            permissions={getPermissionLabels(caregiver.permissions)}
+                            onEdit={() => handleEditCaregiver(caregiver.id)}
+                            onRemove={() => handleRemoveCaregiver(caregiver.id)}
+                        />
+                    </Grid>
+                ))}
+                <Grid size={{ xs: 12, md: 4 }} sx={{ mb: 1.5, display: 'flex' }}>
+                    <Button
+                        variant="contained"
+                        onClick={handleAddCaregiver}
+                        startIcon={<AddIcon />}
+                        sx={{
+                            bgcolor: { xs: '#8b5cf6', md: '#fff' },
+                            color: { xs: '#fff', md: '#000' },
+                            borderRadius: '12px',
+                            p: 2,
+                            width: '100%',
+                            height: { md: '100%' },
+                            textTransform: 'none',
+                            fontWeight: 600,
+                            mt: { xs: 2, md: 0 },
+                            '&:hover': {
+                                bgcolor: { xs: '#6c5aae', md: '#f0f0f0' }
+                            },
+                            border: { md: '1px solid #e0e0e0' }
+                        }}
+                        aria-label="Add new caregiver"
+                    >
+                        Add New Caregiver
+                    </Button>
+                </Grid>
+            </Grid>
             <CaregiverModal
                 open={caregiverModalOpen}
                 onClose={() => setCaregiverModalOpen(false)}

@@ -2,7 +2,8 @@
 'use client';
 
 import BottomNavigation from "@/app/components/BottomNavigation";
-import UserHeader from "@/app/components/UserHeader";
+import { PatientProfileHeader } from "@/app/components/PaitientProfileHeader";
+import { UserHeader } from "@/app/components/UserHeader";
 import { HeaderProvider, useHeader } from "@/app/contexts/headerContext";
 import { Box } from "@mui/material";
 import { useRouter } from "next/navigation";
@@ -25,12 +26,19 @@ function LayoutContent({ children }: { children: React.ReactNode }) {
 
     return (
         <Box>
-            <UserHeader 
-                onBack={handleGoBack}
-                {...headerContent}
-            />
+            {headerContent.variant === 'patient-profile' ? (
+                <PatientProfileHeader 
+                    onBack={handleGoBack}
+                    {...headerContent}
+                />
+            ) : (
+                <UserHeader 
+                    onBack={handleGoBack}
+                    {...headerContent}
+                />
+            )}
             {children}
-            <BottomNavigation/>
+            <BottomNavigation />
         </Box>
     );
 }

@@ -2,7 +2,7 @@
 
 import React, { Fragment, useEffect } from 'react';
 import {
-  Box
+  Grid
 } from '@mui/material';
 import PersonalInfornation from './components/PersonalInfornation';
 import AccountPreferences from './components/AccountPreferences';
@@ -19,31 +19,42 @@ const AccountManagementPage: React.FC = () => {
 
   useEffect(() => {
     setHeaderContent({
-      title: 'Account Management'
+      variant: 'patient-profile',
+      title: 'Account Management',
+      patientDetails: {
+        name: 'Sarah Johnson',
+        mrn: 'MRN78945',
+        age: '58'
+      }
     });
   }, [setHeaderContent]);
 
   return (
     <Fragment>
-      {/* Header */}
+      <Grid container spacing={2} sx={{ p: 2.5, pb: 0 }}>
+        {/* First Column */}
+        <Grid size={{ xs: 12, md: 6 }}>
+          {/* Personal Information - Row 1 Column 1 */}
+          <PersonalInfornation />
 
-      {/* Main Content */}
-      <Box sx={{ p: 2.5, pb: 12.5 }}>
-        {/* Personal Information */}
-        <PersonalInfornation />
+          {/* Privacy & Security - Row 2 Column 1 */}
+          <PrivacyAndSecurity />
+        </Grid>
 
-        {/* Account Preferences */}
-        <AccountPreferences />
+        {/* Second Column */}
+        <Grid size={{ xs: 12, md: 6 }}>
+          {/* Account Preferences - Row 1 Column 2 */}
+          <AccountPreferences />
+        </Grid>
+      </Grid>
 
-        {/* Privacy & Security */}
-        <PrivacyAndSecurity />
-
+      <Grid sx={{ p: 2.5, pt: 0, pb: 10 }}>
         {/* Caregivers & Family Access */}
         <CaregiversAndFamilyAccess />
 
         {/* Support & Help */}
         <SupportAndHelp />
-      </Box>
+      </Grid>
     </Fragment>
   );
 };
