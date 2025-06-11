@@ -1,5 +1,6 @@
-// app/components/PatientProfileHeader.tsx
-import { Avatar, Box, IconButton, Typography } from '@mui/material';
+"use client"
+
+import { Avatar, Box, Button, IconButton, Typography, useMediaQuery, useTheme } from '@mui/material';
 import { ArrowBack as ArrowBackIcon } from '@mui/icons-material';
 import React from 'react';
 
@@ -22,10 +23,12 @@ export function PatientProfileHeader({
   patientDetails,
   showBackButton = true,
 }: PatientProfileHeaderProps) {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   return (
     <Box
       sx={{
-        background: 'linear-gradient(90deg, #2B61EB -21.25%, #8645E1 47.12%, #1F4ED8 116.67%)',
+        background: 'linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%)',
         color: 'white',
         p: 2.5,
         borderRadius: '0 0 20px 20px'
@@ -40,7 +43,34 @@ export function PatientProfileHeader({
         <Typography variant="h6" sx={{ fontWeight: 'bold', flex: 1, textAlign: 'center' }}>
           {title}
         </Typography>
-        <Box width={34} />
+        {!isMobile && (
+          <React.Fragment>
+            <Button variant="contained" sx={{
+              color: '#fff',
+              fontWeight: 400,
+              marginLeft: "10px",
+              bgcolor: 'rgba(255, 255, 255, 0.2)',
+              border: 'none',
+              bordeRadius: '8px',
+              backdropFilter: 'blur(10px)',
+              transition: 'background-color 0.2s'
+            }}>
+              Export Data
+            </Button>
+            <Button variant="contained" sx={{
+              color: '#fff',
+              marginLeft: "10px",
+              fontWeight: 400,
+              bgcolor: 'rgba(255, 255, 255, 0.2)',
+              border: 'none',
+              bordeRadius: '8px',
+              backdropFilter: 'blur(10px)',
+              transition: 'background-color 0.2s'
+            }}>
+              Support
+            </Button>
+          </React.Fragment>
+        )}
       </Box>
 
       <Box sx={{ display: 'flex', alignItems: 'center', mb: 0.5 }}>
@@ -60,7 +90,7 @@ export function PatientProfileHeader({
           <Typography variant="h6" sx={{ fontWeight: 600, mx: 1 }}>
             {patientDetails.name}
           </Typography>
-          <Typography variant="body2" sx={{ opacity: 0.9, mb: 0.5, mx: 1  }}>
+          <Typography variant="body2" sx={{ opacity: 0.9, mb: 0.5, mx: 1 }}>
             MRN: {patientDetails.mrn} • Age: {patientDetails.age}
           </Typography>
           {patientDetails.diagnosisDate && patientDetails.stage && (

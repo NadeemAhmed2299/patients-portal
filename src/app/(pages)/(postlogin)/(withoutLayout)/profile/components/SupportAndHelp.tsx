@@ -1,4 +1,4 @@
-import { Box, Typography } from '@mui/material'
+import { Box, Typography, useMediaQuery, useTheme } from '@mui/material'
 import React from 'react'
 import DangerZoneCard from './DangerZoneCard'
 import InformationCard from '@/app/components/InformationCard';
@@ -43,21 +43,25 @@ const settingItems: settingItemsType[] = [
 ];
 
 function SupportAndHelp() {
+    const theme = useTheme();
+    const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
     return (
         <Box sx={{ mb: 4 }}>
-            <Typography variant="h6" sx={{ fontWeight: 600, mb: 2, color: '#333' }}>
-                Support & Help
-            </Typography>
+            {isMobile && <React.Fragment>
+                <Typography variant="h6" sx={{ fontWeight: 600, mb: 2, color: '#333' }}>
+                    Support & Help
+                </Typography>
 
-            {settingItems.map((item) => (
-                <InformationCard
-                    key={item.title}
-                    icon={item.icon}
-                    title={item.title}
-                    subtitle={item.subtitle}
-                    onClick={item.onClick}
-                />
-            ))}
+                {settingItems.map((item) => (
+                    <InformationCard
+                        key={item.title}
+                        icon={item.icon}
+                        title={item.title}
+                        subtitle={item.subtitle}
+                        onClick={item.onClick}
+                    />
+                ))}
+            </React.Fragment>}
 
             <DangerZoneCard onDelete={handleDeleteAccount} />
         </Box>

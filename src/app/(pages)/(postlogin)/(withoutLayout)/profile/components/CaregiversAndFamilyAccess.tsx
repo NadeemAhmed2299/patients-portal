@@ -162,7 +162,7 @@ function CaregiversAndFamilyAccess() {
                         onClick={handleAddCaregiver}
                         startIcon={<AddIcon />}
                         sx={{
-                            bgcolor: { xs: '#8b5cf6', md: '#fff' },
+                            bgcolor: { xs: '#8b5cf6', md: 'rgba(139, 92, 246, 0.05)' },
                             color: { xs: '#fff', md: '#000' },
                             borderRadius: '12px',
                             p: 2,
@@ -171,10 +171,10 @@ function CaregiversAndFamilyAccess() {
                             textTransform: 'none',
                             fontWeight: 600,
                             mt: { xs: 2, md: 0 },
+                            border: '2px dashed rgba(139, 92, 246, 0.3)',
                             '&:hover': {
-                                bgcolor: { xs: '#6c5aae', md: '#f0f0f0' }
-                            },
-                            border: { md: '1px solid #e0e0e0' }
+                                bgcolor: { xs: '#6c5aae', md: 'rgba(139, 92, 246, 0.1)' }
+                            }
                         }}
                         aria-label="Add new caregiver"
                     >

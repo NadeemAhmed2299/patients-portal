@@ -38,7 +38,7 @@ export function UserHeader({
   return (
     <Box
       sx={{
-        background: 'linear-gradient(90deg, #2B61EB -21.25%, #8645E1 47.12%, #1F4ED8 116.67%)',
+        background: 'linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%)',
         color: 'white',
         p: 2.5,
         borderRadius: '0 0 20px 20px'
